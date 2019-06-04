@@ -3,6 +3,7 @@
 var animalArray =["wolf","dog","cat","lion","tiger","racoon","panda","koala","eagle","kangaroo"];
 var gif="";
 var empty = true;
+var index = 0;
 var responseArray =[];
 
 
@@ -17,7 +18,7 @@ var getGif = function(gif) {
         btn.attr("data-id", response.meta.response_id);
         
         $('#btnsSection').append(btn);
-        initialdisplay(response);
+        initialdisplay(response,gif);
         responseArray.push(response);
         // console.log(response.meta.response_id)
         
@@ -27,18 +28,19 @@ var getGif = function(gif) {
     gif=animalArray[i];
     getGif(gif);
    }
-function initialdisplay(response){
+function initialdisplay(response,gif){
     if(empty){
         for(i=0;i < 9;i++){
             // console.log(response.data[i].images.fixed_height.url)
         var gifUrlstill = response.data[i].images.fixed_height_still.url;
         var gifUrlanimate = response.data[i].images.fixed_height.url;
-        // console.log(gifUrlanimate)
+      
         var count = i+1;
-        var gifImg = $(" <div class= card><img class= gifs src="+gifUrlstill+" data-still ="+gifUrlstill+" data-animate="+gifUrlanimate+" data-state= still ><p class= card-text >image "+count+"</p></div>");
+        var gifImg = $(" <div class= card><img class= gifs src="+gifUrlstill+" data-still ="+gifUrlstill+" data-animate="+gifUrlanimate+" data-state= still data-name="+gif+" ><p class= card-text >image "+count+"</p></div>");
         
         $("#displaySection").append(gifImg);
         }
+        
         empty=false}
 
 }
@@ -59,6 +61,7 @@ $(".app").on("click", function(event) {
 }
     if (target.is(".animalbtn")){
         // console.log(target.attr("data-id"));
+        var name = target.html();
         for(i=0;i < responseArray.length; i++){
          
          var id = responseArray[i].meta.response_id
@@ -70,7 +73,7 @@ $(".app").on("click", function(event) {
                 var gifUrlanimate = responseArray[i].data[j].images.fixed_height.url;
         // console.log(gifUrlanimate)
                 var count = j+1;
-                var gifImg = $(" <div class= card><img class= gifs src="+gifUrlstill+" data-still ="+gifUrlstill+" data-animate="+gifUrlanimate+" data-state= still ><p class= card-text >image "+count+"</p></div>");
+                var gifImg = $(" <div class= card><img class= gifs src="+gifUrlstill+" data-still ="+gifUrlstill+" data-animate="+gifUrlanimate+" data-state= still data-name="+name+"><p class= card-text >image "+count+"</p></div>");
         
                  $("#displaySection").append(gifImg);
             }
@@ -84,6 +87,30 @@ $(".app").on("click", function(event) {
        animalArray.push(animal);
        getGif(animal);
     }
+    if (target.is("#seeMore")){
+        
+        
+        var more = $(".gifs").attr("data-name");
+        var getmore = function(more) {
+            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + more + "&api_key=yMIL3jYfGCd0ym74WTKRtp04feOSDoHc&limit=90&rating=g";
+            $.ajax({
+              url: queryURL,
+              method: "GET"
+            }).then(function ready(response) { 
+                console.log(response);
+                index=index+9;
+                for(i=index;i < index+9;i++){
+                var gifUrlstill = response.data[i].images.fixed_height_still.url;
+                var gifUrlanimate = response.data[i].images.fixed_height.url;
+              
+                var count = i+1;
+                var gifImg = $(" <div class= card><img class= gifs src="+gifUrlstill+" data-still ="+gifUrlstill+" data-animate="+gifUrlanimate+" data-state= still data-name="+gif+" ><p class= card-text >image "+count+"</p></div>");
+                
+                $("#displaySection").append(gifImg);
+                }
+            });
+        };
+        getmore(more);
+    }
   });
 
-//   console.log(responseArray)

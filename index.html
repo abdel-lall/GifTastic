@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <title>giphy</title>
 </head>
-<body>
+<body class="app">
    
       <div class="navbar bg-dark navbar-dark">
         <div class="container d-flex justify-content-between">
@@ -18,9 +18,9 @@
           <div class="input-group mb-3 ">
             <a href="#" class="navbar-brand col-8">Giphy App</a>
             
-            <input type="text" class="form-control col-4" placeholder="Add An Animal Here" aria-label="Add An Animal Here" aria-describedby="button-addon2">
+            <input id="myinput" type="text" class="form-control col-4" placeholder="Add An Animal Here" aria-label="Add An Animal Here" aria-describedby="button-addon2">
             <div class="input-group-append">
-              <button class="btn btn-outline-info" type="button" id="button-addon2">Add</button>
+              <button class="btn btn-outline-info" type="button" id="addbtn">Add</button>
             </div>
         
           </div>
@@ -41,7 +41,7 @@
       <div class="album text-muted">
         <div class="container">
   
-          <div class="row" id="displaySection">
+          <div class="row displaySection" id="displaySection">
          
            
           </div>

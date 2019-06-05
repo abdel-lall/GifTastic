@@ -3,13 +3,13 @@
 var animalArray =["wolf","dog","cat","lion","tiger","racoon","panda","koala","eagle","kangaroo"];
 var gif="";
 var empty = true;
-var index = 0;
+var index=0;
 var responseArray =[];
-var myvar=0;
+
 
 
 var getGif = function(gif) {
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=yMIL3jYfGCd0ym74WTKRtp04feOSDoHc&limit=9&rating=g";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=yMIL3jYfGCd0ym74WTKRtp04feOSDoHc&limit=9";
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -35,9 +35,10 @@ function initialdisplay(response,gif){
             // console.log(response.data[i].images.fixed_height.url)
         var gifUrlstill = response.data[i].images.fixed_height_still.url;
         var gifUrlanimate = response.data[i].images.fixed_height.url;
+        var rating = response.data[i].rating;
       
-        var count = i+1;
-        var gifImg = $(" <div class= card><img class= gifs src="+gifUrlstill+" data-still ="+gifUrlstill+" data-animate="+gifUrlanimate+" data-state= still data-name="+gif+" ><p class= card-text >image "+count+"</p></div>");
+        
+        var gifImg = $(" <div class= card><img class= gifs src="+gifUrlstill+" data-still ="+gifUrlstill+" data-animate="+gifUrlanimate+" data-state= still data-name="+gif+" ><p class= card-text >rating: "+rating+"</p></div>");
         
         $("#displaySection").append(gifImg);
         }
@@ -93,22 +94,22 @@ $(".app").on("click", function(event) {
         
         var more = $(".gifs").attr("data-name");
         var getmore = function(more) {
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + more + "&api_key=yMIL3jYfGCd0ym74WTKRtp04feOSDoHc&limit=90&rating=g";
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + more + "&api_key=yMIL3jYfGCd0ym74WTKRtp04feOSDoHc&limit=90";
             $.ajax({
               url: queryURL,
               method: "GET"
             }).then(function ready(response) { 
                 console.log(response);
-                index=index+9;
+                index = index+9;
                 for(i=index;i < index+9;i++){
                 var gifUrlstill = response.data[i].images.fixed_height_still.url;
                 var gifUrlanimate = response.data[i].images.fixed_height.url;
-                
-                var count = myvar+i+1;
-                var gifImg = $(" <div class= card><img class= gifs src="+gifUrlstill+" data-still ="+gifUrlstill+" data-animate="+gifUrlanimate+" data-state= still data-name="+gif+" ><p class= card-text >image "+count+"</p></div>");
+                var rating = response.data[i].rating;
+               
+                var gifImg = $(" <div class= card><img class= gifs src="+gifUrlstill+" data-still ="+gifUrlstill+" data-animate="+gifUrlanimate+" data-state= still data-name="+gif+" ><p class= card-text >rating: "+rating+"</p></div>");
                 
                 $("#displaySection").append(gifImg);
-                if (i == 89){index = -9; myvar= myvar+90};
+                
                 }
             });
         };

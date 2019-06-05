@@ -9,7 +9,7 @@ var myvar=0;
 
 
 var getGif = function(gif) {
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=yMIL3jYfGCd0ym74WTKRtp04feOSDoHc&limit=9&rating=g";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=yMIL3jYfGCd0ym74WTKRtp04feOSDoHc&limit=9&rating=g";
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -93,7 +93,7 @@ $(".app").on("click", function(event) {
         
         var more = $(".gifs").attr("data-name");
         var getmore = function(more) {
-            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + more + "&api_key=yMIL3jYfGCd0ym74WTKRtp04feOSDoHc&limit=90&rating=g";
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + more + "&api_key=yMIL3jYfGCd0ym74WTKRtp04feOSDoHc&limit=90&rating=g";
             $.ajax({
               url: queryURL,
               method: "GET"

@@ -86,8 +86,10 @@ $(".app").on("click", function(event) {
     if (target.is("#addbtn")){
         event.preventDefault()
        var animal=$("#myinput").val();
+       if (animal !== ""){
        animalArray.push(animal);
        getGif(animal);
+    }
     }
     if (target.is("#seeMore")){
         

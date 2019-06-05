@@ -5,6 +5,7 @@ var gif="";
 var empty = true;
 var index = 0;
 var responseArray =[];
+var myvar=0;
 
 
 var getGif = function(gif) {
@@ -102,11 +103,12 @@ $(".app").on("click", function(event) {
                 for(i=index;i < index+9;i++){
                 var gifUrlstill = response.data[i].images.fixed_height_still.url;
                 var gifUrlanimate = response.data[i].images.fixed_height.url;
-              
-                var count = i+1;
+                
+                var count = myvar+i+1;
                 var gifImg = $(" <div class= card><img class= gifs src="+gifUrlstill+" data-still ="+gifUrlstill+" data-animate="+gifUrlanimate+" data-state= still data-name="+gif+" ><p class= card-text >image "+count+"</p></div>");
                 
                 $("#displaySection").append(gifImg);
+                if (i == 89){index = -9; myvar= myvar+90};
                 }
             });
         };

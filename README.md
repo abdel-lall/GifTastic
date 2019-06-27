@@ -10,3 +10,4 @@ This data is provided by the GIPHY API.
 the app takes a value from a user input box and adds it to topics array. 
 the app is fully mobile responsive.
 it also Allows users to request additional gifs to be added to the page.
+link:https://abdel-lall.github.io/GifTastic/
